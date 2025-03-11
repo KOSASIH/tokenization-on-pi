@@ -5,62 +5,83 @@ Pi Coin Configuration Constants
 This module contains constants related to the Pi Coin cryptocurrency.
 """
 
-# Pi Coin Symbol
-PI_COIN_SYMBOL = "Pi"  # Symbol for Pi Coin
+from typing import List, Dict, Any
+import os
+import json
 
-# Pi Coin Value
-PI_COIN_VALUE = 314159  # Fixed value of Pi Coin in USD
+# Load configuration from environment variables or a JSON file for dynamic settings
+def load_config() -> Dict[str, Any]:
+    config = {
+        "PI_COIN_SYMBOL": os.getenv("PI_COIN_SYMBOL", "Pi"),
+        "PI_COIN_VALUE": float(os.getenv("PI_COIN_VALUE", 314159.0)),
+        "PI_COIN_SUPPLY": int(os.getenv("PI_COIN_SUPPLY", 100_000_000_000)),
+        "PI_COIN_TRANSACTION_FEE": float(os.getenv("PI_COIN_TRANSACTION_FEE", 0.01)),
+        "PI_COIN_BLOCK_TIME": int(os.getenv("PI_COIN_BLOCK_TIME", 10)),
+        "PI_COIN_MINING_DIFFICULTY": int(os.getenv("PI_COIN_MINING_DIFFICULTY", 1000)),
+        "PI_COIN_MINING_REWARD": float(os.getenv("PI_COIN_MINING_REWARD", 12.5)),
+        "PI_COIN_NETWORK_PROTOCOL": os.getenv("PI_COIN_NETWORK_PROTOCOL", "PoS"),
+        "PI_COIN_MAX_TRANSACTION_SIZE": int(os.getenv("PI_COIN_MAX_TRANSACTION_SIZE", 1_000_000)),
+        "PI_COIN_DECIMALS": int(os.getenv("PI_COIN_DECIMALS", 18)),
+        "PI_COIN_GENESIS_BLOCK_TIMESTAMP": os.getenv("PI_COIN_GENESIS_BLOCK_TIMESTAMP", "2023-01-01T00:00:00Z"),
+        "PI_COIN_GOVERNANCE_MODEL": os.getenv("PI_COIN_GOVERNANCE_MODEL", "Decentralized"),
+        "PI_COIN_ENCRYPTION_ALGORITHM": os.getenv("PI_COIN_ENCRYPTION_ALGORITHM", "AES-256"),
+        "PI_COIN_HASHING_ALGORITHM": os.getenv("PI_COIN_HASHING_ALGORITHM", "SHA-256"),
+        "PI_COIN_SIGNATURE_SCHEME": os.getenv("PI_COIN_SIGNATURE_SCHEME", "ECDSA"),
+        "PI_COIN_MAX_PEERS": int(os.getenv("PI_COIN_MAX_PEERS", 100)),
+        "PI_COIN_NODE_TIMEOUT": int(os.getenv("PI_COIN_NODE_TIMEOUT", 30)),
+        "PI_COIN_CONNECTION_RETRY_INTERVAL": int(os.getenv("PI_COIN_CONNECTION_RETRY_INTERVAL", 5)),
+        "PI_COIN_MIN_STAKE_AMOUNT": float(os.getenv("PI_COIN_MIN_STAKE_AMOUNT", 100.0)),
+        "PI_COIN_STAKE_REWARD_RATE": float(os.getenv("PI_COIN_STAKE_REWARD_RATE", 0.05)),
+        "PI_COIN_API_REQUEST_LIMIT": int(os.getenv("PI_COIN_API_REQUEST_LIMIT", 1000)),
+        "PI_COIN_API_KEY_EXPIRATION": int(os.getenv("PI_COIN_API_KEY_EXPIRATION", 3600)),
+        "PI_COIN_KYC_REQUIRED": os.getenv("PI_COIN_KYC_REQUIRED", "True") == "True",
+        "PI_COIN_COMPLIANCE_JURISDICTIONS": json.loads(os.getenv("PI_COIN_COMPLIANCE_JURISDICTIONS", '["US", "EU", "UK"]')),
+        "PI_COIN_TWO_FACTOR_AUTH": os.getenv("PI_COIN_TWO_FACTOR_AUTH", "True") == "True",
+        "PI_COIN_MAX_FAILED_LOGIN_ATTEMPTS": int(os.getenv("PI_COIN_MAX_FAILED_LOGIN_ATTEMPTS", 5)),
+        "PI_COIN_LOCKOUT_DURATION": int(os.getenv("PI_COIN_LOCKOUT_DURATION", 300)),
+        "PI_COIN_HARD_FORK_VERSION": os.getenv("PI_COIN_HARD_FORK_VERSION", "1.0.0"),
+        "PI_COIN_HARD_FORK_DATE": os.getenv("PI_COIN_HARD_FORK_DATE", "2024-01-01T00:00:00Z"),
+    }
+    return config
 
-# Pi Coin Supply
-PI_COIN_SUPPLY = 100_000_000_000  # Total supply of Pi Coin
+# Load the configuration
+CONFIG = load_config()
 
-# Pi Coin Transaction Fee
-PI_COIN_TRANSACTION_FEE = 0.01  # Transaction fee in USD
+# Constants for easy access
+PI_COIN_SYMBOL: str = CONFIG["PI_COIN_SYMBOL"]
+PI_COIN_VALUE: float = CONFIG["PI_COIN_VALUE"]
+PI_COIN_SUPPLY: int = CONFIG["PI_COIN_SUPPLY"]
+PI_COIN_TRANSACTION_FEE: float = CONFIG["PI_COIN_TRANSACTION_FEE"]
+PI_COIN_BLOCK_TIME: int = CONFIG["PI_COIN_BLOCK_TIME"]
+PI_COIN_MINING_DIFFICULTY: int = CONFIG["PI_COIN_MINING_DIFFICULTY"]
+PI_COIN_MIN ING_REWARD: float = CONFIG["PI_COIN_MINING_REWARD"]
+PI_COIN_NETWORK_PROTOCOL: str = CONFIG["PI_COIN_NETWORK_PROTOCOL"]
+PI_COIN_MAX_TRANSACTION_SIZE: int = CONFIG["PI_COIN_MAX_TRANSACTION_SIZE"]
+PI_COIN_DECIMALS: int = CONFIG["PI_COIN_DECIMALS"]
+PI_COIN_GENESIS_BLOCK_TIMESTAMP: str = CONFIG["PI_COIN_GENESIS_BLOCK_TIMESTAMP"]
+PI_COIN_GOVERNANCE_MODEL: str = CONFIG["PI_COIN_GOVERNANCE_MODEL"]
+PI_COIN_ENCRYPTION_ALGORITHM: str = CONFIG["PI_COIN_ENCRYPTION_ALGORITHM"]
+PI_COIN_HASHING_ALGORITHM: str = CONFIG["PI_COIN_HASHING_ALGORITHM"]
+PI_COIN_SIGNATURE_SCHEME: str = CONFIG["PI_COIN_SIGNATURE_SCHEME"]
+PI_COIN_MAX_PEERS: int = CONFIG["PI_COIN_MAX_PEERS"]
+PI_COIN_NODE_TIMEOUT: int = CONFIG["PI_COIN_NODE_TIMEOUT"]
+PI_COIN_CONNECTION_RETRY_INTERVAL: int = CONFIG["PI_COIN_CONNECTION_RETRY_INTERVAL"]
+PI_COIN_MIN_STAKE_AMOUNT: float = CONFIG["PI_COIN_MIN_STAKE_AMOUNT"]
+PI_COIN_STAKE_REWARD_RATE: float = CONFIG["PI_COIN_STAKE_REWARD_RATE"]
+PI_COIN_API_REQUEST_LIMIT: int = CONFIG["PI_COIN_API_REQUEST_LIMIT"]
+PI_COIN_API_KEY_EXPIRATION: int = CONFIG["PI_COIN_API_KEY_EXPIRATION"]
+PI_COIN_KYC_REQUIRED: bool = CONFIG["PI_COIN_KYC_REQUIRED"]
+PI_COIN_COMPLIANCE_JURISDICTIONS: List[str] = CONFIG["PI_COIN_COMPLIANCE_JURISDICTIONS"]
+PI_COIN_TWO_FACTOR_AUTH: bool = CONFIG["PI_COIN_TWO_FACTOR_AUTH"]
+PI_COIN_MAX_FAILED_LOGIN_ATTEMPTS: int = CONFIG["PI_COIN_MAX_FAILED_LOGIN_ATTEMPTS"]
+PI_COIN_LOCKOUT_DURATION: int = CONFIG["PI_COIN_LOCKOUT_DURATION"]
+PI_COIN_HARD_FORK_VERSION: str = CONFIG["PI_COIN_HARD_FORK_VERSION"]
+PI_COIN_HARD_FORK_DATE: str = CONFIG["PI_COIN_HARD_FORK_DATE"]
 
-# Pi Coin Block Time
-PI_COIN_BLOCK_TIME = 10  # Average block time in seconds
-
-# Pi Coin Mining Difficulty
-PI_COIN_MINING_DIFFICULTY = 1000  # Difficulty level for mining Pi Coin
-
-# Pi Coin Reward for Mining
-PI_COIN_MINING_REWARD = 12.5  # Reward for mining a block
-
-# Pi Coin Network Protocol
-PI_COIN_NETWORK_PROTOCOL = "PoS"  # Proof of Stake
-
-# Pi Coin Maximum Transaction Size
-PI_COIN_MAX_TRANSACTION_SIZE = 1_000_000  # Maximum transaction size in bytes
-
-# Pi Coin Decimals
-PI_COIN_DECIMALS = 18  # Number of decimal places for Pi Coin
-
-# Pi Coin Genesis Block Timestamp
-PI_COIN_GENESIS_BLOCK_TIMESTAMP = "2023-01-01T00:00:00Z"  # Timestamp of the genesis block
-
-# Pi Coin Governance Model
-PI_COIN_GOVERNANCE_MODEL = "Decentralized"  # Governance model for Pi Coin
-
-# Pi Coin Security Features
-PI_COIN_ENCRYPTION_ALGORITHM = "AES-256"  # Encryption algorithm for securing transactions
-PI_COIN_HASHING_ALGORITHM = "SHA-256"  # Hashing algorithm for block verification
-PI_COIN_SIGNATURE_SCHEME = "ECDSA"  # Digital signature scheme for transaction signing
-
-# Pi Coin Network Parameters
-PI_COIN_MAX_PEERS = 100  # Maximum number of peers in the network
-PI_COIN_NODE_TIMEOUT = 30  # Timeout for node responses in seconds
-PI_COIN_CONNECTION_RETRY_INTERVAL = 5  # Retry interval for node connections in seconds
-
-# Pi Coin Staking Parameters
-PI_COIN_MIN_STAKE_AMOUNT = 100  # Minimum amount required to stake
-PI_COIN_STAKE_REWARD_RATE = 0.05  # Annual reward rate for staking
-
-# Pi Coin API Rate Limits
-PI_COIN_API_REQUEST_LIMIT = 1000  # Maximum API requests per hour
-PI_COIN_API_KEY_EXPIRATION = 3600  # API key expiration time in seconds
-
-# Pi Coin Regulatory Compliance
-PI_COIN_KYC_REQUIRED = True  # Whether KYC is required for transactions
-PI_COIN_COMPLIANCE_JURISDICTIONS = ["US", "EU", "UK"]  # Jurisdictions for compliance
+# Additional advanced features
+PI_COIN_AUTO_SCALING: bool = True  # Enable automatic scaling of network resources
+PI_COIN_DDOS_PROTECTION: bool = True  # Enable DDoS protection mechanisms
+PI_COIN_AUDIT_LOGGING: bool = True  # Enable logging for auditing purposes
+PI_COIN_NETWORK_MONITORING: bool = True  # Enable network monitoring for performance tracking
 
 # Additional constants can be added here as needed
